@@ -65,4 +65,25 @@ export class TextNotes {
       return `Error: User not found!`;
     }
   }
+  public removeNote(name: string, title: string): string {
+    const joinTitle = title.split(' ').join('');
+    // Check if the user exists already.
+    if (fs.existsSync(`./database/${name}`) == true) {
+      // Check if the title exists.
+      if (fs.existsSync(`./database/${name}/${joinTitle}.json`) == true) {
+        // Delete the file
+        fs.rmSync(`./database/${name}/${joinTitle}.json`);
+        console.log(chalk.green(`Note deleted! with title ${title}`));
+        return `Note deleted! with title ${title}`;
+      } else {
+        // Error if the title does not exist.
+        console.log(chalk.red(`Error: Title does not exist!`));
+        return `Error: Title does not exist!`;
+      }
+    } else {
+      // Error if the user does not exist.
+      console.log(chalk.red(`Error: User not found!`));
+      return `Error: User not found!`;
+    }
+  }
 }
