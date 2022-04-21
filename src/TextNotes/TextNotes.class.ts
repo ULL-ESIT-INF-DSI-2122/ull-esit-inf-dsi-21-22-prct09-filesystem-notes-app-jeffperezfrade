@@ -25,6 +25,44 @@ export class TextNotes {
   }
 
   public static addNote(name: string, title: string, body: string, color: colors): string {
-    
+    const joinTitle = title.split(' ').join('');
+    const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;
+    // Check if the user exists already.
+    if (fs.existsSync(`.database/${name}`) == true) {
+      // Check if the title already exists.
+      if (fs.existsSync(`./database/${name}/${joinTitle}.json`) == false) {
+        // We add it with the structure
+        fs.writeFileSync(`./database/${name}/${joinTitle}.json`, fileStructure);
+        console.log(chalk.green(`New note added! with title: ${title}.`));
+        return `New note added! with title: ${title}.`;
+      } else {
+        console.log(chalk.red(`Error: Note title taken!`));
+        return `Error: Note title taken!`;
+      }
+    } else {
+      fs.mkdirSync(`./database/${name}`, {recursive: true});
+      fs.writeFileSync(`./database/${name}/${joinTitle}.json`, fileStructure);
+      console.log(chalk.green(`New note added! with title: ${title}.`));
+      return `New note added! with title: ${title}.`;
+    }
+  }
+  public modifyNote(name: string, title: string, body: string, color: colors): string {
+    const joinTitle = title.split(' ').join('');
+    const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;
+    // Check if user exists already.
+    if (fs.existsSync(`./database/${name}`) == true) {
+      if (fs.existsSync(`./database/${name}/${joinTitle}.json`) == true) {
+        // Modifing note.
+        fs.writeFileSync(`./database/${name}/${joinTitle}.json`, fileStructure);
+        console.log(chalk.green(`Successfully modified note! with title: ${title}`));
+        return `Successfully modified note! with title: ${title}`;
+      } else {
+        console.log(chalk.red(`Error: Title does not exist!`));
+        return `Error: Title does not exist!`;
+      }
+    } else {
+      console.log(chalk.red(`Error: User not found!`));
+      return `Error: User not found!`;
+    }
   }
 }
