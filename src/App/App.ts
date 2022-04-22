@@ -5,6 +5,11 @@ import {TextNotes, colors} from '../TextNotes/TextNotes.class';
  */
 const textNotes: TextNotes = TextNotes.getNotes();
 /**
+ * Creating constants due to Sonar Cloud duplications.
+ */
+const noteTitle: string = 'Note title';
+const userName: string = 'User name';
+/**
  * Adding new note command line.
  */
 yargs.command({
@@ -12,12 +17,12 @@ yargs.command({
   describe: 'Add new note',
   builder: {
     user: {
-      describe: 'User name',
+      describe: userName,
       demandOption: true,
       type: 'string',
     },
     title: {
-      describe: 'Note title',
+      describe: noteTitle,
       demandOption: true,
       type: 'string',
     },
@@ -56,12 +61,12 @@ yargs.command({
   describe: 'Modify note',
   builder: {
     user: {
-      describe: 'User name',
+      describe: userName,
       demandOption: true,
       type: 'string',
     },
     title: {
-      describe: 'Note title',
+      describe: noteTitle,
       demandOption: true,
       type: 'string',
     },
@@ -100,12 +105,12 @@ yargs.command({
   describe: 'Delete note',
   builder: {
     user: {
-      describe: 'User name',
+      describe: userName,
       demandOption: true,
       type: 'string',
     },
     title: {
-      describe: 'Note title',
+      describe: noteTitle,
       demandOption: true,
       type: 'string',
     },
@@ -118,14 +123,14 @@ yargs.command({
   },
 });
 /**
- * List notes commnad line.
+ * List notes command line.
  */
 yargs.command({
   command: 'list',
   describe: 'List all notes',
   builder: {
     user: {
-      describe: 'User name',
+      describe: userName,
       demandOption: true,
       type: 'string',
     },
@@ -142,12 +147,12 @@ yargs.command({
   describe: 'Print note',
   builder: {
     user: {
-      describe: 'User name',
+      describe: userName,
       demandOption: true,
       type: 'string',
     },
     title: {
-      describe: 'Note title',
+      describe: noteTitle,
       demandOption: true,
       type: 'string',
     },
