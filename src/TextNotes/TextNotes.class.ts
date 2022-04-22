@@ -24,15 +24,15 @@ export class TextNotes {
     return TextNotes.notes;
   }
 
-  public addNote(name: string, title: string, body: string, color: colors): string {
+  public addNote(userName: string, title: string, body: string, color: colors): string {
     const joinTitle = title.split(' ').join('');
     const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;
     // Check if the user exists already.
-    if (fs.existsSync(`.database/${name}`) == true) {
+    if (fs.existsSync(`.database/${userName}`) == true) {
       // Check if the title already exists.
-      if (fs.existsSync(`./database/${name}/${joinTitle}.json`) == false) {
+      if (fs.existsSync(`./database/${userName}/${joinTitle}.json`) == false) {
         // We add it with the structure
-        fs.writeFileSync(`./database/${name}/${joinTitle}.json`, fileStructure);
+        fs.writeFileSync(`./database/${userName}/${joinTitle}.json`, fileStructure);
         console.log(chalk.green(`New note added! with title: ${title}.`));
         return `New note added! with title: ${title}.`;
       } else {
@@ -40,8 +40,8 @@ export class TextNotes {
         return `Error: Note title taken!`;
       }
     } else {
-      fs.mkdirSync(`./database/${name}`, {recursive: true});
-      fs.writeFileSync(`./database/${name}/${joinTitle}.json`, fileStructure);
+      fs.mkdirSync(`./database/${userName}`, {recursive: true});
+      fs.writeFileSync(`./database/${userName}/${joinTitle}.json`, fileStructure);
       console.log(chalk.green(`New note added! with title: ${title}.`));
       return `New note added! with title: ${title}.`;
     }
