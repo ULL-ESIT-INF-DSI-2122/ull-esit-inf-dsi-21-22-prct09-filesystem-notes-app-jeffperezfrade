@@ -29,6 +29,14 @@ export class TextNotes {
     if (!TextNotes.notes) TextNotes.notes = new TextNotes();
     return TextNotes.notes;
   }
+  /**
+   * Add a note to the database.
+   * @param userName User name.
+   * @param title Note title.
+   * @param body Information of the note.
+   * @param color Color of the note.
+   * @returns The string result for tests.
+   */
   public addNote(userName: string, title: string, body: string, color: colors): string {
     const joinTitle = title.split(' ').join('');
     const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;
