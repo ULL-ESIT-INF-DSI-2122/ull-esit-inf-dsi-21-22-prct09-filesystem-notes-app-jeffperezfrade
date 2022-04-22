@@ -114,9 +114,7 @@ yargs.command({
     if (
       typeof argv.title === 'string' &&
       typeof argv.user === 'string'
-    ) {
-      textNotes.deleteNote(argv.user, argv.title);
-    }
+    ) textNotes.deleteNote(argv.user, argv.title);
   },
 });
 /**
