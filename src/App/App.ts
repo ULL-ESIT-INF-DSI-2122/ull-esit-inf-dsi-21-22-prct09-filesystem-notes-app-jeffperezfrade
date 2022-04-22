@@ -47,7 +47,7 @@ yargs.command({
       typeof argv.user === 'string'
     ) {
       Object.values(colors).forEach((color) => {
-        if (argv.color == color) {
+        if (argv.color === color) {
           noteColor = color;
         }
       });
@@ -93,7 +93,7 @@ yargs.command({
       typeof argv.user === 'string'
     ) {
       Object.values(colors).forEach((color) => {
-        if (argv.color == color) {
+        if (argv.color === color) {
           noteColor = color;
         }
       });
