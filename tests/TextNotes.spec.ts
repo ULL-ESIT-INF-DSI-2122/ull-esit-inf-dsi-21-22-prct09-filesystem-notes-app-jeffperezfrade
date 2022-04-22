@@ -18,15 +18,17 @@ describe('Practica 9 - Tests', () => {
         expect(notes.addNote('Jeff', 'First attempt', 'Hello, I am Jeff', colors.green)).to.be.equal('New note added! with title: First attempt.');
       });
       it('notes.addNote() returns New note added! with title: Second attempt.', () => {
-        expect(notes.addNote('Jeff', 'Second attempt', 'Hello, I am Jeff', colors.green)).to.be.equal('New note added! with title: Second attempt.');
+        expect(notes.addNote('Jeff', 'Second attempt', 'Hello, I am Jeff', colors.blue)).to.be.equal('New note added! with title: Second attempt.');
       });
       it('notes.addNote() returns New note added! with title: Third attempt.', () => {
-        expect(notes.addNote('Jack', 'Third attempt', 'Hello, I am Jack', colors.green)).to.be.equal('New note added! with title: Third attempt.');
+        expect(notes.addNote('Jack', 'Third attempt', 'Hello, I am Jack', colors.yellow)).to.be.equal('New note added! with title: Third attempt.');
       });
       it('notes.addNote() returns Error: Note title taken!', () => {
         expect(notes.addNote('Jeff', 'First attempt', 'Hello, I am Jeff', colors.green)).to.be.equal('Error: Note title taken!');
       });
     });
+
+    
   });
 });
 
