@@ -28,7 +28,11 @@ describe('Practica 9 - Tests', () => {
       });
     });
 
-    
+    describe('modifyNote() method tests', () => {
+      it('notes.modifyNote() returns Successfully modified note! with title: First attempt', () => {
+        expect(notes.modifyNote('Jeff', 'First attempt', 'Hi, Jeff is my name', colors.red)).to.be.equal('Successfully modified note! with title: First attempt');
+      });
+    });
   });
 });
 
