@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import * as chalk from 'chalk';
-import * as yargs from 'yargs';
 /**
  * Enum that contains all the notes colors.
  */

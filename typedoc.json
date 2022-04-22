@@ -1,6 +1,7 @@
 {
   "entryPoints": [
-    ""
+    "./src/TextNotes/TextNotes.ts",
+    "./src/App/App.ts"
   ],
   "out": "./type-docs"
 }
