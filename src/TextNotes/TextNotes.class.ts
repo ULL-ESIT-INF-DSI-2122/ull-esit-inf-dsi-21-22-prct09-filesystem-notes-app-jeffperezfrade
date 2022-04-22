@@ -136,6 +136,12 @@ export class TextNotes {
       return `Error: User not found!`;
     }
   }
+  /**
+   * Print the title and the body of a note with the title and user given.
+   * @param userName Name of the user that belongs the note.
+   * @param title Note title.
+   * @returns The result message.
+   */
   public printNote(userName: string, title: string): string {
     const joinTitle = title.split(' ').join('');
     // Check if user exists.
