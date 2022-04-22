@@ -42,9 +42,7 @@ yargs.command({
       typeof argv.user === 'string'
     ) {
       Object.values(colors).forEach((color) => {
-        if (argv.color == color) {
-          noteColor = color;
-        }
+        if (argv.color == color) noteColor = color;
       });
       textNotes.addNote(argv.user, argv.title, argv.body, noteColor);
     }
@@ -88,9 +86,7 @@ yargs.command({
       typeof argv.user === 'string'
     ) {
       Object.values(colors).forEach((color) => {
-        if (argv.color == color) {
-          noteColor = color;
-        }
+        if (argv.color == color) noteColor = color;
       });
       textNotes.modifyNote(argv.user, argv.title, argv.body, noteColor);
     }
