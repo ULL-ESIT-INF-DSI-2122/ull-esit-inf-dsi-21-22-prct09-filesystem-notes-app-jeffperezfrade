@@ -86,14 +86,14 @@ export class TextNotes {
       return `Error: User not found!`;
     }
   }
-  public listNotes(name: string): string {
+  public listNotes(userName: string): string {
     // Check if user exists
-    if (fs.existsSync(`./database/${name}`) == true) {
+    if (fs.existsSync(`./database/${userName}`) == true) {
       console.log(chalk.white('Your notes: ' + '\n'));
       let fileNames: string = '';
       // Find all notes
-      fs.readdirSync(`./database/${name}/`).forEach((note) => {
-        const data = fs.readFileSync(`./database/${name}/${note}`);
+      fs.readdirSync(`./database/${userName}/`).forEach((note) => {
+        const data = fs.readFileSync(`./database/${userName}/${note}`);
         const dataJSON = JSON.parse(data.toString());
         console.log(chalk.keyword(dataJSON.color)(`- ${dataJSON.title}` + '\n'));
         fileNames += `- ${dataJSON.title}` + '\n';
