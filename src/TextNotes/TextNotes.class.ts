@@ -40,9 +40,9 @@ export class TextNotes {
     const joinTitle = title.split(' ').join('');
     const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;
     // Check if the user exists already.
-    if (fs.existsSync(`./database/${userName}`) == true) {
+    if (fs.existsSync(`./database/${userName}`)) {
       // Check if the title already exists.
-      if (fs.existsSync(`./database/${userName}/${joinTitle}.json`) == false) {
+      if (!fs.existsSync(`./database/${userName}/${joinTitle}.json`)) {
         // We add it with the structure
         fs.writeFileSync(`./database/${userName}/${joinTitle}.json`, fileStructure);
         console.log(chalk.green(`New note added! with title: ${title}.`));
@@ -70,8 +70,8 @@ export class TextNotes {
     const joinTitle = title.split(' ').join('');
     const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;
     // Check if user exists already.
-    if (fs.existsSync(`./database/${userName}`) == true) {
-      if (fs.existsSync(`./database/${userName}/${joinTitle}.json`) == true) {
+    if (fs.existsSync(`./database/${userName}`)) {
+      if (fs.existsSync(`./database/${userName}/${joinTitle}.json`)) {
         // Modifing note.
         fs.writeFileSync(`./database/${userName}/${joinTitle}.json`, fileStructure);
         console.log(chalk.green(`Successfully modified note! with title: ${title}`));
@@ -94,9 +94,9 @@ export class TextNotes {
   public deleteNote(userName: string, title: string): string {
     const joinTitle = title.split(' ').join('');
     // Check if the user exists already.
-    if (fs.existsSync(`./database/${userName}`) == true) {
+    if (fs.existsSync(`./database/${userName}`)) {
       // Check if the title exists.
-      if (fs.existsSync(`./database/${userName}/${joinTitle}.json`) == true) {
+      if (fs.existsSync(`./database/${userName}/${joinTitle}.json`)) {
         // Delete the file
         fs.rmSync(`./database/${userName}/${joinTitle}.json`);
         console.log(chalk.green(`Note deleted! with title: ${title}`));
@@ -119,7 +119,7 @@ export class TextNotes {
    */
   public listNotes(userName: string): string {
     // Check if user exists
-    if (fs.existsSync(`./database/${userName}`) == true) {
+    if (fs.existsSync(`./database/${userName}`)) {
       console.log(chalk.white('Your notes: ' + '\n'));
       let fileNames: string = '';
       // Find all notes
@@ -144,8 +144,8 @@ export class TextNotes {
   public printNote(userName: string, title: string): string {
     const joinTitle = title.split(' ').join('');
     // Check if user exists.
-    if (fs.existsSync(`./database/${userName}`) == true) {
-      if (fs.existsSync(`./database/${userName}/${joinTitle}.json`) == true) {
+    if (fs.existsSync(`./database/${userName}`)) {
+      if (fs.existsSync(`./database/${userName}/${joinTitle}.json`)) {
         const data = fs.readFileSync(`./database/${userName}/${joinTitle}.json`);
         const dataJSON = JSON.parse(data.toString());
         console.log(chalk.keyword(dataJSON.color)(`# Title: ${dataJSON.title} \n# Body: ${dataJSON.body}`));
