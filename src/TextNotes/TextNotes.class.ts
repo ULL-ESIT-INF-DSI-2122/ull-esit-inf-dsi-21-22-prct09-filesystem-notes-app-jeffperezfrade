@@ -16,7 +16,7 @@ export class TextNotes {
 
   private constructor() {}
 
-  get notes(): TextNotes {
+  public static getNotes(): TextNotes {
     if (!fs.existsSync(`./database`)) {
       fs.mkdirSync(`./database`, {recursive: true});
     }
