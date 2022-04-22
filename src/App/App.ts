@@ -165,3 +165,7 @@ yargs.command({
     ) textNotes.printNote(argv.user, argv.title);
   },
 });
+/**
+ * Important to process the arguments.
+ */
+yargs.parse();

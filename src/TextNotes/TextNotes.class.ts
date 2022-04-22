@@ -12,10 +12,16 @@ export enum colors {
 }
 
 export class TextNotes {
+  /**
+   * Implementing singleton pattern with an static object.
+   */
   private static notes: TextNotes;
 
   private constructor() {}
-
+  /**
+   * Static method that returns the notes instance.
+   * @returns The object of the class.
+   */
   public static getNotes(): TextNotes {
     if (!fs.existsSync(`./database`)) {
       fs.mkdirSync(`./database`, {recursive: true});
@@ -23,7 +29,6 @@ export class TextNotes {
     if (!TextNotes.notes) TextNotes.notes = new TextNotes();
     return TextNotes.notes;
   }
-
   public addNote(userName: string, title: string, body: string, color: colors): string {
     const joinTitle = title.split(' ').join('');
     const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;

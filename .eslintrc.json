@@ -18,6 +18,7 @@
         "no-unused-vars": "off",
         "require-jsdoc": "off",
         "max-len": "off",
-        "linebreak-style":"off"
+        "linebreak-style":"off",
+        "valid-jsdoc":"off"
     }
 }
