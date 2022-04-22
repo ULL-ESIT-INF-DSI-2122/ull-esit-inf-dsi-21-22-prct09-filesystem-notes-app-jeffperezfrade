@@ -24,7 +24,6 @@
     "eslint-config-google": "^0.14.0",
     "mocha": "^9.2.1",
     "nyc": "^15.1.0",
-    "prompt": "^1.2.2",
     "ts-node": "^10.7.0",
     "tsc-watch": "^4.6.0",
     "typedoc": "^0.22.13",
