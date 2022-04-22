@@ -108,8 +108,8 @@ export class TextNotes {
       fs.readdirSync(`./database/${userName}/`).forEach((note) => {
         const data = fs.readFileSync(`./database/${userName}/${note}`);
         const dataJSON = JSON.parse(data.toString());
-        console.log(chalk.keyword(dataJSON.color)(`- ${dataJSON.title}` + '\n'));
-        fileNames += `- ${dataJSON.title}` + '\n';
+        console.log(chalk.keyword(dataJSON.color)(`# ${dataJSON.title}` + '\n'));
+        fileNames += `# ${dataJSON.title}` + '\n';
       });
       return fileNames;
     } else {

@@ -21,7 +21,10 @@ describe('Practica 9 - Tests', () => {
         expect(notes.addNote('Jeff', 'Second attempt', 'Hello, I am Jeff', colors.blue)).to.be.equal('New note added! with title: Second attempt.');
       });
       it('notes.addNote() returns New note added! with title: Third attempt.', () => {
-        expect(notes.addNote('Jack', 'Third attempt', 'Hello, I am Jack', colors.yellow)).to.be.equal('New note added! with title: Third attempt.');
+        expect(notes.addNote('Jack', 'Third attempt', 'Hello, I am Jack', colors.red)).to.be.equal('New note added! with title: Third attempt.');
+      });
+      it('notes.addNote() returns New note added! with title: Fourth attempt.', () => {
+        expect(notes.addNote('Jack', 'Fourth attempt', 'Hello, I am Jack', colors.yellow)).to.be.equal('New note added! with title: Fourth attempt.');
       });
       it('notes.addNote() returns Error: Note title taken!', () => {
         expect(notes.addNote('Jeff', 'First attempt', 'Hello, I am Jeff', colors.green)).to.be.equal('Error: Note title taken!');
@@ -49,6 +52,15 @@ describe('Practica 9 - Tests', () => {
       });
       it('notes.deleteNote() should return:  Error: User not found!', () => {
         expect(notes.deleteNote('Jake', 'First attempt')).to.be.equal('Error: User not found!');
+      });
+    });
+
+    describe('listNotes() method tests', () => {
+      it('notes.listNotes() returns # Fourth attempt # Third attempt', () => {
+        expect(notes.listNotes('Jack')).to.be.equal('# Fourth attempt\n# Third attempt\n');
+      });
+      it('notes.listNotes() returns Error: User not found!', () => {
+        expect(notes.listNotes('Jhon')).to.be.equal('Error: User not found!');
       });
     });
   });
