@@ -1,3 +1,47 @@
 import * as yargs from 'yargs';
 import {TextNotes, colors} from '../TextNotes/TextNotes.class';
 const textNotes: TextNotes = TextNotes.getNotes();
+
+yargs.command({
+  command: 'add',
+  describe: 'Add new note',
+  builder: {
+    user: {
+      describe: 'User name',
+      demandOption: true,
+      type: 'string',
+    },
+    title: {
+      describe: 'Note title',
+      demandOption: true,
+      type: 'string',
+    },
+    body: {
+      describe: 'Note body',
+      demandOption: true,
+      type: 'string',
+    },
+    color: {
+      describe: 'Note color',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    // Default color: blue.
+    let noteColor: colors = colors.blue;
+    if (
+      typeof argv.color == 'string' &&
+      typeof argv.body == 'string' &&
+      typeof argv.title == 'string' &&
+      typeof argv.user == 'string'
+    ) {
+      Object.values(colors).forEach((color) => {
+        if (argv.color == color) {
+          noteColor = color;
+        }
+      });
+      textNotes.addNote(argv.user, argv.title, argv.body, noteColor);
+    }
+  },
+});

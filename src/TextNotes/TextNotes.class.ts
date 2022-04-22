@@ -24,7 +24,7 @@ export class TextNotes {
     return TextNotes.notes;
   }
 
-  public static addNote(name: string, title: string, body: string, color: colors): string {
+  public addNote(name: string, title: string, body: string, color: colors): string {
     const joinTitle = title.split(' ').join('');
     const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;
     // Check if the user exists already.
