@@ -41,7 +41,7 @@ export class TextNotes {
     const joinTitle = title.split(' ').join('');
     const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;
     // Check if the user exists already.
-    if (fs.existsSync(`.database/${userName}`) == true) {
+    if (fs.existsSync(`./database/${userName}`) == true) {
       // Check if the title already exists.
       if (fs.existsSync(`./database/${userName}/${joinTitle}.json`) == false) {
         // We add it with the structure
