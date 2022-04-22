@@ -7,8 +7,8 @@ const textNotes: TextNotes = TextNotes.getNotes();
 /**
  * Creating constants due to Sonar Cloud duplications.
  */
-const noteTitle: string = 'Note title';
-const userName: string = 'User name';
+const noteTitle = 'Note title';
+const userName = 'User name';
 /**
  * Adding new note command line.
  */
