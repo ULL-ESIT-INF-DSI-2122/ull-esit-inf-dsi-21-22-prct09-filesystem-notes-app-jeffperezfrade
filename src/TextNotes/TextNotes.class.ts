@@ -46,14 +46,14 @@ export class TextNotes {
       return `New note added! with title: ${title}.`;
     }
   }
-  public modifyNote(name: string, title: string, body: string, color: colors): string {
+  public modifyNote(userName: string, title: string, body: string, color: colors): string {
     const joinTitle = title.split(' ').join('');
     const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;
     // Check if user exists already.
-    if (fs.existsSync(`./database/${name}`) == true) {
-      if (fs.existsSync(`./database/${name}/${joinTitle}.json`) == true) {
+    if (fs.existsSync(`./database/${userName}`) == true) {
+      if (fs.existsSync(`./database/${userName}/${joinTitle}.json`) == true) {
         // Modifing note.
-        fs.writeFileSync(`./database/${name}/${joinTitle}.json`, fileStructure);
+        fs.writeFileSync(`./database/${userName}/${joinTitle}.json`, fileStructure);
         console.log(chalk.green(`Successfully modified note! with title: ${title}`));
         return `Successfully modified note! with title: ${title}`;
       } else {
