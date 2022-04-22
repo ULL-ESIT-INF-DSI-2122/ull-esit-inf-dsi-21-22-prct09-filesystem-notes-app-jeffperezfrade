@@ -86,6 +86,12 @@ export class TextNotes {
       return `Error: User not found!`;
     }
   }
+  /**
+   * With the title it deteles an specific note from a user.
+   * @param userName Name of the user that belongs the note.
+   * @param title Note title.
+   * @returns The result message.
+   */
   public deleteNote(userName: string, title: string): string {
     const joinTitle = title.split(' ').join('');
     // Check if the user exists already.
