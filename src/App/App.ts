@@ -140,3 +140,28 @@ yargs.command({
     if (typeof argv.user === 'string') textNotes.listNotes(argv.user);
   },
 });
+/**
+ * Print note command line.
+ */
+yargs.command({
+  command: 'print',
+  describe: 'Print note',
+  builder: {
+    user: {
+      describe: 'User name',
+      demandOption: true,
+      type: 'string',
+    },
+    title: {
+      describe: 'Note title',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    if (
+      typeof argv.title === 'string' &&
+      typeof argv.user === 'string'
+    ) textNotes.printNote(argv.user, argv.title);
+  },
+});
