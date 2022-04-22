@@ -113,6 +113,11 @@ export class TextNotes {
       return `Error: User not found!`;
     }
   }
+  /**
+   * This method lists all the notes of the user given.
+   * @param userName Name of the user that belongs the note.
+   * @returns The result message.
+   */
   public listNotes(userName: string): string {
     // Check if user exists
     if (fs.existsSync(`./database/${userName}`) == true) {
