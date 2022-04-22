@@ -29,3 +29,5 @@ describe('Practica 9 - Tests', () => {
     });
   });
 });
+
+fs.rmdirSync('./database', {recursive: true});
