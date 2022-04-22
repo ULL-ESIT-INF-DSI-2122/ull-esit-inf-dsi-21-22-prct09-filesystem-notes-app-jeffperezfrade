@@ -32,6 +32,12 @@ describe('Practica 9 - Tests', () => {
       it('notes.modifyNote() returns Successfully modified note! with title: First attempt', () => {
         expect(notes.modifyNote('Jeff', 'First attempt', 'Hi, Jeff is my name', colors.red)).to.be.equal('Successfully modified note! with title: First attempt');
       });
+      it('notes.modifyNote() returns Error: User not found!', () => {
+        expect(notes.modifyNote('Erick', 'First attempt', 'Hi Erick', colors.blue)).to.be.equal('Error: User not found!');
+      });
+      it('notes.modifyNote() returns Error: Title does not exist!', () => {
+        expect(notes.modifyNote('Jeff', 'Fifth attempt', 'Hi, Jeff is my name', colors.red)).to.be.equal('Error: Title does not exist!');
+      });
     });
   });
 });
