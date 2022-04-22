@@ -110,7 +110,7 @@ yargs.command({
     },
     title: {
       describe: 'Note title',
-      demandOption: true, 
+      demandOption: true,
       type: 'string',
     },
   },
@@ -123,4 +123,20 @@ yargs.command({
     }
   },
 });
-
+/**
+ * List notes commnad line.
+ */
+yargs.command({
+  command: 'list',
+  describe: 'List all notes',
+  builder: {
+    user: {
+      describe: 'User name',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    if (typeof argv.user === 'string') textNotes.listNotes(argv.user);
+  },
+});
