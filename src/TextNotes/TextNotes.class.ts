@@ -31,7 +31,7 @@ export class TextNotes {
   }
   /**
    * Add a note to the database.
-   * @param userName User name.
+   * @param userName Name of the user that belongs the note.
    * @param title Note title.
    * @param body Information of the note.
    * @param color Color of the note.
@@ -59,6 +59,14 @@ export class TextNotes {
       return `New note added! with title: ${title}.`;
     }
   }
+  /**
+   * This method modify a note from one user.
+   * @param userName Name of the user that belongs the note.
+   * @param title Note title.
+   * @param body Information of the note.
+   * @param color Color of the note.
+   * @returns The result message.
+   */
   public modifyNote(userName: string, title: string, body: string, color: colors): string {
     const joinTitle = title.split(' ').join('');
     const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;
