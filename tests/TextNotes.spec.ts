@@ -63,6 +63,18 @@ describe('Practica 9 - Tests', () => {
         expect(notes.listNotes('Jhon')).to.be.equal('Error: User not found!');
       });
     });
+
+    describe('printNote() method tests', () => {
+      it('notes.printNote() should return # Title: Secondattempt # Body: Hello, I am Jeff', () => {
+        expect(notes.printNote('Jeff', 'Second attempt')).to.be.equal('# Title: Second attempt \n# Body: Hello, I am Jeff');
+      });
+      it('notes.printNote() should return Error: Title does not exist!', () => {
+        expect(notes.printNote('Jeff', 'Third attempt')).to.be.equal('Error: Title does not exist!');
+      });
+      it('notes.printNote() should return Error: User not found!', () => {
+        expect(notes.printNote('Mike', 'First attempt')).to.be.equal('Error: User not found!');
+      });
+    });
   });
 });
 
