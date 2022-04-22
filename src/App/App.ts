@@ -47,7 +47,9 @@ yargs.command({
       typeof argv.user === 'string'
     ) {
       Object.values(colors).forEach((color) => {
-        if (argv.color == color) noteColor = color;
+        if (argv.color == color) {
+          noteColor = color;
+        }
       });
       textNotes.addNote(argv.user, argv.title, argv.body, noteColor);
     }
@@ -91,7 +93,9 @@ yargs.command({
       typeof argv.user === 'string'
     ) {
       Object.values(colors).forEach((color) => {
-        if (argv.color == color) noteColor = color;
+        if (argv.color == color) {
+          noteColor = color;
+        }
       });
       textNotes.modifyNote(argv.user, argv.title, argv.body, noteColor);
     }
@@ -119,7 +123,9 @@ yargs.command({
     if (
       typeof argv.title === 'string' &&
       typeof argv.user === 'string'
-    ) textNotes.deleteNote(argv.user, argv.title);
+    ) {
+      textNotes.deleteNote(argv.user, argv.title);
+    }
   },
 });
 /**
@@ -136,7 +142,9 @@ yargs.command({
     },
   },
   handler(argv) {
-    if (typeof argv.user === 'string') textNotes.listNotes(argv.user);
+    if (typeof argv.user === 'string') {
+      textNotes.listNotes(argv.user);
+    }
   },
 });
 /**
@@ -161,7 +169,9 @@ yargs.command({
     if (
       typeof argv.title === 'string' &&
       typeof argv.user === 'string'
-    ) textNotes.printNote(argv.user, argv.title);
+    ) {
+      textNotes.printNote(argv.user, argv.title);
+    }
   },
 });
 /**
