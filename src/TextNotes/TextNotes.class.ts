@@ -22,8 +22,12 @@ export class TextNotes {
    * @returns The object of the class.
    */
   public static getNotes(): TextNotes {
-    if (!fs.existsSync(`./database`)) fs.mkdirSync(`./database`, {recursive: true});
-    if (!TextNotes.notes) TextNotes.notes = new TextNotes();
+    if (!fs.existsSync(`./database`)) {
+      fs.mkdirSync(`./database`, {recursive: true});
+    }
+    if (!TextNotes.notes) {
+      TextNotes.notes = new TextNotes();
+    }
     return TextNotes.notes;
   }
   /**
@@ -72,7 +76,7 @@ export class TextNotes {
     // Check if user exists already.
     if (fs.existsSync(`./database/${userName}`)) {
       if (fs.existsSync(`./database/${userName}/${joinTitle}.json`)) {
-        // Modifing note.
+        // Modifying note.
         fs.writeFileSync(`./database/${userName}/${joinTitle}.json`, fileStructure);
         console.log(chalk.green(`Successfully modified note! with title: ${title}`));
         return `Successfully modified note! with title: ${title}`;
@@ -86,7 +90,7 @@ export class TextNotes {
     }
   }
   /**
-   * With the title it deteles an specific note from a user.
+   * With the title it deletes an specific note from a user.
    * @param userName Name of the user that belongs the note.
    * @param title Note title.
    * @returns The result message.
