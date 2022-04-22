@@ -126,7 +126,7 @@ export class TextNotes {
     // Check if user exists
     if (fs.existsSync(`./database/${userName}`)) {
       console.log(chalk.white('Your notes: ' + '\n'));
-      let fileNames: string = '';
+      let fileNames = '';
       // Find all notes
       fs.readdirSync(`./database/${userName}/`).forEach((note) => {
         const data = fs.readFileSync(`./database/${userName}/${note}`);
