@@ -104,4 +104,22 @@ export class TextNotes {
       return `Error: User not found!`;
     }
   }
+  public printNote(userName: string, title: string): string {
+    const joinTitle = title.split(' ').join('');
+    // Check if user exists.
+    if (fs.existsSync(`./database/${userName}`) == true) {
+      if (fs.existsSync(`./database/${userName}/${joinTitle}.json`) == true) {
+        const data = fs.readFileSync(`./database/${userName}/${joinTitle}.json`);
+        const dataJSON = JSON.parse(data.toString());
+        console.log(chalk.keyword(dataJSON.color)(`# Title: ${dataJSON.title} \n# Body: ${dataJSON.body}`));
+        return `# Title: ${dataJSON.title} \n# Body: ${dataJSON.body}`;
+      } else {
+        console.log(chalk.red('Error: Title does not exist!'));
+        return 'Error: Title does not exist!';
+      }
+    } else {
+      console.log(chalk.red('Error: User not found!'));
+      return 'Error: User not found!';
+    }
+  }
 }
