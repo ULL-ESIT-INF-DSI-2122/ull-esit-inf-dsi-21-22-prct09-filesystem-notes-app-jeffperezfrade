@@ -86,8 +86,8 @@ export class TextNotes {
       if (fs.existsSync(`./database/${userName}/${joinTitle}.json`) == true) {
         // Delete the file
         fs.rmSync(`./database/${userName}/${joinTitle}.json`);
-        console.log(chalk.green(`Note deleted! with title ${title}`));
-        return `Note deleted! with title ${title}`;
+        console.log(chalk.green(`Note deleted! with title: ${title}`));
+        return `Note deleted! with title: ${title}`;
       } else {
         // Error if the title does not exist.
         console.log(chalk.red(`Error: Title does not exist!`));

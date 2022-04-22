@@ -39,6 +39,18 @@ describe('Practica 9 - Tests', () => {
         expect(notes.modifyNote('Jeff', 'Fifth attempt', 'Hi, Jeff is my name', colors.red)).to.be.equal('Error: Title does not exist!');
       });
     });
+
+    describe('deleteNote() method tests', () => {
+      it('notes.deleteNote() should return:  Note deleted! with title: First attempt', () => {
+        expect(notes.deleteNote('Jeff', 'First attempt')).to.be.equal('Note deleted! with title: First attempt');
+      });
+      it('notes.deleteNote() should return:  Error: Title does not exist!', () => {
+        expect(notes.deleteNote('Jeff', 'Fourth attempt')).to.be.equal('Error: Title does not exist!');
+      });
+      it('notes.deleteNote() should return:  Error: User not found!', () => {
+        expect(notes.deleteNote('Jake', 'First attempt')).to.be.equal('Error: User not found!');
+      });
+    });
   });
 });
 
