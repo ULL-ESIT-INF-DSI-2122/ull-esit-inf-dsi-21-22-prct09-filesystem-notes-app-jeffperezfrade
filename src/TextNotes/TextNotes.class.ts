@@ -35,6 +35,7 @@ export class TextNotes {
    * @returns The string result for tests.
    */
   public addNote(userName: string, title: string, body: string, color: colors): string {
+    // Filename cannot have spaces.
     const joinTitle = title.split(' ').join('');
     const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;
     // Check if the user exists already.
@@ -65,6 +66,7 @@ export class TextNotes {
    * @returns The result message.
    */
   public modifyNote(userName: string, title: string, body: string, color: colors): string {
+    // Filename cannot have spaces.
     const joinTitle = title.split(' ').join('');
     const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;
     // Check if user exists already.
@@ -90,6 +92,7 @@ export class TextNotes {
    * @returns The result message.
    */
   public deleteNote(userName: string, title: string): string {
+    // Filename cannot have spaces.
     const joinTitle = title.split(' ').join('');
     // Check if the user exists already.
     if (fs.existsSync(`./database/${userName}`)) {
@@ -140,6 +143,7 @@ export class TextNotes {
    * @returns The result message.
    */
   public printNote(userName: string, title: string): string {
+    // Filename cannot have spaces.
     const joinTitle = title.split(' ').join('');
     // Check if user exists.
     if (fs.existsSync(`./database/${userName}`)) {
