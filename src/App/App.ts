@@ -36,10 +36,10 @@ yargs.command({
     // Default color: blue.
     let noteColor: colors = colors.blue;
     if (
-      typeof argv.color == 'string' &&
-      typeof argv.body == 'string' &&
-      typeof argv.title == 'string' &&
-      typeof argv.user == 'string'
+      typeof argv.color === 'string' &&
+      typeof argv.body === 'string' &&
+      typeof argv.title === 'string' &&
+      typeof argv.user === 'string'
     ) {
       Object.values(colors).forEach((color) => {
         if (argv.color == color) {
@@ -82,10 +82,10 @@ yargs.command({
     // Default color: blue.
     let noteColor: colors = colors.blue;
     if (
-      typeof argv.color == 'string' &&
-      typeof argv.body == 'string' &&
-      typeof argv.title == 'string' &&
-      typeof argv.user == 'string'
+      typeof argv.color === 'string' &&
+      typeof argv.body === 'string' &&
+      typeof argv.title === 'string' &&
+      typeof argv.user === 'string'
     ) {
       Object.values(colors).forEach((color) => {
         if (argv.color == color) {
@@ -96,3 +96,31 @@ yargs.command({
     }
   },
 });
+/**
+ * Delete note command line.
+ */
+yargs.command({
+  command: 'delete',
+  describe: 'Delete note',
+  builder: {
+    user: {
+      describe: 'User name',
+      demandOption: true,
+      type: 'string',
+    },
+    title: {
+      describe: 'Note title',
+      demandOption: true, 
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    if (
+      typeof argv.title === 'string' &&
+      typeof argv.user === 'string'
+    ) {
+      textNotes.deleteNote(argv.user, argv.title);
+    }
+  },
+});
+

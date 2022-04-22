@@ -65,7 +65,7 @@ export class TextNotes {
       return `Error: User not found!`;
     }
   }
-  public removeNote(name: string, title: string): string {
+  public deleteNote(name: string, title: string): string {
     const joinTitle = title.split(' ').join('');
     // Check if the user exists already.
     if (fs.existsSync(`./database/${name}`) == true) {
