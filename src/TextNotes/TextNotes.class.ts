@@ -16,7 +16,9 @@ export class TextNotes {
    */
   private static notes: TextNotes;
 
-  private constructor() {}
+  private constructor() {
+    // Empty constructor comment intentionally for code smells.
+  }
   /**
    * Static method that returns the notes instance.
    * @returns The object of the class.
