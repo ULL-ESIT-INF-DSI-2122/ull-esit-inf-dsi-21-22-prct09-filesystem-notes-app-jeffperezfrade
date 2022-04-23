@@ -255,8 +255,7 @@ A continuación ejecutamos el comando `npm run doc` y se nos generaran todos los
 
 En esta carpeta abrimos el `index.html` con la extensión de VSCode llamada `Live Server` para poder ver el contenido de la página.
 
-![Documentation Page]()
-
+![Documentation Page](./img/webTypedoc.PNG)
 
 # 7. Conclusión.
 ---
