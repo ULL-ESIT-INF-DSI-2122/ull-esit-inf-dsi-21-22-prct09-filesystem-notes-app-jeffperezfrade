@@ -1,16 +1,16 @@
 import * as yargs from 'yargs';
 import {TextNotes, colors} from '../TextNotes/TextNotes.class';
 /**
- * TextNotes object.
- */
-const textNotes: TextNotes = TextNotes.getNotes();
-/**
  * Creating constants due to Sonar Cloud duplications.
  * Removing the type annotation 'string' due to code s
  */
 const noteTitle = 'Note title';
 const userName = 'User name';
 const noteColor = 'Note color';
+/**
+ * TextNotes object.
+ */
+const textNotes: TextNotes = TextNotes.getNotes();
 /**
  * Adding new note command line.
  */
@@ -42,6 +42,7 @@ yargs.command({
   handler(argv) {
     // Default color: blue.
     let noteColor: colors = colors.blue;
+    // Check if the arguments are strings.
     if (
       typeof argv.color === 'string' &&
       typeof argv.body === 'string' &&
@@ -86,6 +87,7 @@ yargs.command({
   handler(argv) {
     // Default color: blue.
     let noteColor: colors = colors.blue;
+    // Check if the arguments are strings.
     if (
       typeof argv.color === 'string' &&
       typeof argv.body === 'string' &&
@@ -118,6 +120,7 @@ yargs.command({
     },
   },
   handler(argv) {
+    // Check if the arguments are strings.
     if (
       typeof argv.title === 'string' &&
       typeof argv.user === 'string'
@@ -138,6 +141,7 @@ yargs.command({
     },
   },
   handler(argv) {
+    // Check if the arguments are strings.
     if (typeof argv.user === 'string') textNotes.listNotes(argv.user);
   },
 });
@@ -160,6 +164,7 @@ yargs.command({
     },
   },
   handler(argv) {
+    // Check if the arguments are strings.
     if (
       typeof argv.title === 'string' &&
       typeof argv.user === 'string'
