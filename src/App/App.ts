@@ -2,7 +2,7 @@ import * as yargs from 'yargs';
 import {TextNotes, colors} from '../TextNotes/TextNotes.class';
 /**
  * Creating constants due to Sonar Cloud duplications.
- * Removing the type annotation 'string' due to code s
+ * Removing the type annotation 'string' due to code smells
  */
 const noteTitleString = 'Note title';
 const userNameString = 'User name';

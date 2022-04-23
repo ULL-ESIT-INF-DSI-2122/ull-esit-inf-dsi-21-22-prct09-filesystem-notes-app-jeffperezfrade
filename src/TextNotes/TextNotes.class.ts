@@ -24,12 +24,8 @@ export class TextNotes {
    * @returns The object of the class.
    */
   public static getNotes(): TextNotes {
-    if (!fs.existsSync(`./database`)) {
-      fs.mkdirSync(`./database`, {recursive: true});
-    }
-    if (!TextNotes.notes) {
-      TextNotes.notes = new TextNotes();
-    }
+    if (!fs.existsSync(`./database`)) fs.mkdirSync(`./database`, {recursive: true});
+    if (!TextNotes.notes) TextNotes.notes = new TextNotes();
     return TextNotes.notes;
   }
   /**
