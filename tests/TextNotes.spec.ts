@@ -60,12 +60,12 @@ describe('Practica 9 - Tests', () => {
         expect(notes.listNotes('Jack')).to.be.equal('# Fourth attempt\n# Third attempt\n');
       });
       it('notes.listNotes() returns Error: User not found!', () => {
-        expect(notes.listNotes('Jhon')).to.be.equal('Error: User not found!');
+        expect(notes.listNotes('John')).to.be.equal('Error: User not found!');
       });
     });
 
     describe('printNote() method tests', () => {
-      it('notes.printNote() should return # Title: Secondattempt # Body: Hello, I am Jeff', () => {
+      it('notes.printNote() should return # Title: Second attempt # Body: Hello, I am Jeff', () => {
         expect(notes.printNote('Jeff', 'Second attempt')).to.be.equal('# Title: Second attempt \n# Body: Hello, I am Jeff');
       });
       it('notes.printNote() should return Error: Title does not exist!', () => {
@@ -77,5 +77,5 @@ describe('Practica 9 - Tests', () => {
     });
   });
 });
-
+// Delete directory.
 fs.rmdirSync('./database', {recursive: true});

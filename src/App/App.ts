@@ -6,9 +6,11 @@ import {TextNotes, colors} from '../TextNotes/TextNotes.class';
 const textNotes: TextNotes = TextNotes.getNotes();
 /**
  * Creating constants due to Sonar Cloud duplications.
+ * Removing the type annotation 'string' due to code s
  */
 const noteTitle = 'Note title';
 const userName = 'User name';
+const noteColor = 'Note color';
 /**
  * Adding new note command line.
  */
@@ -32,7 +34,7 @@ yargs.command({
       type: 'string',
     },
     color: {
-      describe: 'Note color',
+      describe: noteColor,
       demandOption: true,
       type: 'string',
     },
@@ -78,7 +80,7 @@ yargs.command({
       type: 'string',
     },
     color: {
-      describe: 'Note color',
+      describe: noteColor,
       demandOption: true,
       type: 'string',
     },
