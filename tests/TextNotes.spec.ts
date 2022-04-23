@@ -57,7 +57,7 @@ describe('Practica 9 - Tests', () => {
 
     describe('listNotes() method tests', () => {
       it('notes.listNotes() returns # Fourth attempt # Third attempt', () => {
-        expect(notes.listNotes('Jack')).to.be.equal('# Fourth attempt\n# Third attempt\n');
+        expect(notes.listNotes('Jack')).to.be.equal('# Fourth attempt \n# Third attempt \n');
       });
       it('notes.listNotes() returns Error: User not found!', () => {
         expect(notes.listNotes('John')).to.be.equal('Error: User not found!');

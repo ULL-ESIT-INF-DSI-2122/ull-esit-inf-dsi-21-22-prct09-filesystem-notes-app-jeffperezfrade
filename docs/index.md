@@ -50,7 +50,177 @@ Los requisitos que debe cumplir la aplicación de procesamiento de notas de text
 
 **Clase TextNotes:**
 ```ts
+import * as fs from 'fs';
+import * as chalk from 'chalk';
+/**
+ * Enum that contains all the notes colors.
+ */
+export enum colors {
+    green = 'green',
+    yellow = 'yellow',
+    blue = 'blue',
+    red = 'red'
+}
 
+export class TextNotes {
+  /**
+   * Implementing singleton pattern with an static object.
+   */
+  private static notes: TextNotes;
+
+  private constructor() {
+    // Empty constructor comment intentionally for code smells.
+  }
+  /**
+   * Static method that returns the notes instance.
+   * @returns The object of the class.
+   */
+  public static getNotes(): TextNotes {
+    if (!fs.existsSync(`./database`)) {
+      fs.mkdirSync(`./database`, {recursive: true});
+    }
+    if (!TextNotes.notes) {
+      TextNotes.notes = new TextNotes();
+    }
+    return TextNotes.notes;
+  }
+  /**
+   * Add a note to the database.
+   * @param userName Name of the user that belongs the note.
+   * @param title Note title.
+   * @param body Information of the note.
+   * @param color Color of the note.
+   * @returns The string result for tests.
+   */
+  public addNote(userName: string, title: string, body: string, color: colors): string {
+    // Filename cannot have spaces.
+    const joinTitle = title.split(' ').join('');
+    const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;
+    // Check if the user exists already.
+    if (fs.existsSync(`./database/${userName}`)) {
+      // Check if the title already exists.
+      if (!fs.existsSync(`./database/${userName}/${joinTitle}.json`)) {
+        // We add it with the structure.
+        fs.writeFileSync(`./database/${userName}/${joinTitle}.json`, fileStructure);
+        console.log(chalk.green(`New note added! with title: ${title}.`));
+        return `New note added! with title: ${title}.`;
+      } else {
+        console.log(chalk.red(`Error: Note title taken!`));
+        return `Error: Note title taken!`;
+      }
+    } else {
+      fs.mkdirSync(`./database/${userName}`, {recursive: true});
+      fs.writeFileSync(`./database/${userName}/${joinTitle}.json`, fileStructure);
+      console.log(chalk.green(`New note added! with title: ${title}.`));
+      return `New note added! with title: ${title}.`;
+    }
+  }
+  /**
+   * This method modify a note from one user.
+   * @param userName Name of the user that belongs the note.
+   * @param title Note title.
+   * @param body Information of the note.
+   * @param color Color of the note.
+   * @returns The result message.
+   */
+  public modifyNote(userName: string, title: string, body: string, color: colors): string {
+    // Filename cannot have spaces.
+    const joinTitle = title.split(' ').join('');
+    const fileStructure = `{ "title": "${title}", "body": "${body}" , "color": "${color}" }`;
+    // Check if user exists already.
+    if (fs.existsSync(`./database/${userName}`)) {
+      if (fs.existsSync(`./database/${userName}/${joinTitle}.json`)) {
+        // Modifying note.
+        fs.writeFileSync(`./database/${userName}/${joinTitle}.json`, fileStructure);
+        console.log(chalk.green(`Successfully modified note! with title: ${title}`));
+        return `Successfully modified note! with title: ${title}`;
+      } else {
+        console.log(chalk.red(`Error: Title does not exist!`));
+        return `Error: Title does not exist!`;
+      }
+    } else {
+      console.log(chalk.red(`Error: User not found!`));
+      return `Error: User not found!`;
+    }
+  }
+  /**
+   * With the title it deletes an specific note from a user.
+   * @param userName Name of the user that belongs the note.
+   * @param title Note title.
+   * @returns The result message.
+   */
+  public deleteNote(userName: string, title: string): string {
+    // Filename cannot have spaces.
+    const joinTitle = title.split(' ').join('');
+    // Check if the user exists already.
+    if (fs.existsSync(`./database/${userName}`)) {
+      // Check if the title exists.
+      if (fs.existsSync(`./database/${userName}/${joinTitle}.json`)) {
+        // Delete the file
+        fs.rmSync(`./database/${userName}/${joinTitle}.json`);
+        console.log(chalk.green(`Note deleted! with title: ${title}`));
+        return `Note deleted! with title: ${title}`;
+      } else {
+        // Error if the title does not exist.
+        console.log(chalk.red(`Error: Title does not exist!`));
+        return `Error: Title does not exist!`;
+      }
+    } else {
+      // Error if the user does not exist.
+      console.log(chalk.red(`Error: User not found!`));
+      return `Error: User not found!`;
+    }
+  }
+  /**
+   * This method lists all the notes of the user given.
+   * @param userName Name of the user that belongs the note.
+   * @returns The result message.
+   */
+  public listNotes(userName: string): string {
+    // Check if user exists
+    if (fs.existsSync(`./database/${userName}`)) {
+      console.log((`Your notes: \n`));
+      // Removing the type annotation 'string' due to code smells.
+      let fileNames = '';
+      // Find all notes
+      fs.readdirSync(`./database/${userName}/`).forEach((note) => {
+        const data = fs.readFileSync(`./database/${userName}/${note}`);
+        const dataJSON = JSON.parse(data.toString());
+        console.log(chalk.keyword(dataJSON.color)(`# ${dataJSON.title} \n`));
+        fileNames += `# ${dataJSON.title} \n`;
+      });
+      return fileNames;
+    } else {
+      console.log(chalk.red(`Error: User not found!`));
+      return `Error: User not found!`;
+    }
+  }
+  /**
+   * Print the title and the body of a note with the title and user given.
+   * @param userName Name of the user that belongs the note.
+   * @param title Note title.
+   * @returns The result message.
+   */
+  public printNote(userName: string, title: string): string {
+    // Filename cannot have spaces.
+    const joinTitle = title.split(' ').join('');
+    // Check if user exists.
+    if (fs.existsSync(`./database/${userName}`)) {
+      if (fs.existsSync(`./database/${userName}/${joinTitle}.json`)) {
+        const data = fs.readFileSync(`./database/${userName}/${joinTitle}.json`);
+        const dataJSON = JSON.parse(data.toString());
+        console.log(chalk.keyword(dataJSON.color)(`# Title: ${dataJSON.title} \n# Body: ${dataJSON.body}`));
+        return `# Title: ${dataJSON.title} \n# Body: ${dataJSON.body}`;
+      } else {
+        console.log(chalk.red('Error: Title does not exist!'));
+        return 'Error: Title does not exist!';
+      }
+    } else {
+      console.log(chalk.red('Error: User not found!'));
+      return 'Error: User not found!';
+    }
+  }
+}
 ```
 
 **Explicación de la clase TextNotes:**
@@ -83,7 +253,183 @@ Tenemos el atributo privado estático `notes` ya que, como dijimos antes, estamo
 **Fichero de la Aplicación:**
 
 ```ts
-
+import * as yargs from 'yargs';
+import {TextNotes, colors} from '../TextNotes/TextNotes.class';
+/**
+ * Creating constants due to Sonar Cloud duplications.
+ * Removing the type annotation 'string' due to code smells
+ */
+const noteTitleString = 'Note title';
+const userNameString = 'User name';
+const noteColorString = 'Note color';
+/**
+ * TextNotes object.
+ */
+const textNotes: TextNotes = TextNotes.getNotes();
+/**
+ * Adding new note command line.
+ */
+yargs.command({
+  command: 'add',
+  describe: 'Add new note',
+  builder: {
+    user: {
+      describe: userNameString,
+      demandOption: true,
+      type: 'string',
+    },
+    title: {
+      describe: noteTitleString,
+      demandOption: true,
+      type: 'string',
+    },
+    body: {
+      describe: 'Note body',
+      demandOption: true,
+      type: 'string',
+    },
+    color: {
+      describe: noteColorString,
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    // Default color: blue.
+    let noteColor: colors = colors.blue;
+    // Check if the arguments are strings.
+    if (
+      typeof argv.color === 'string' &&
+      typeof argv.body === 'string' &&
+      typeof argv.title === 'string' &&
+      typeof argv.user === 'string'
+    ) {
+      Object.values(colors).forEach((color) => {
+        if (argv.color === color) noteColor = color;
+      });
+      textNotes.addNote(argv.user, argv.title, argv.body, noteColor);
+    }
+  },
+});
+/**
+ * Modify notes command line.
+ */
+yargs.command({
+  command: 'modify',
+  describe: 'Modify note',
+  builder: {
+    user: {
+      describe: userNameString,
+      demandOption: true,
+      type: 'string',
+    },
+    title: {
+      describe: noteTitleString,
+      demandOption: true,
+      type: 'string',
+    },
+    body: {
+      describe: 'Note body',
+      demandOption: true,
+      type: 'string',
+    },
+    color: {
+      describe: noteColorString,
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    // Default color: blue.
+    let noteColor: colors = colors.blue;
+    // Check if the arguments are strings.
+    if (
+      typeof argv.color === 'string' &&
+      typeof argv.body === 'string' &&
+      typeof argv.title === 'string' &&
+      typeof argv.user === 'string'
+    ) {
+      Object.values(colors).forEach((color) => {
+        if (argv.color === color) noteColor = color;
+      });
+      textNotes.modifyNote(argv.user, argv.title, argv.body, noteColor);
+    }
+  },
+});
+/**
+ * Delete note command line.
+ */
+yargs.command({
+  command: 'delete',
+  describe: 'Delete note',
+  builder: {
+    user: {
+      describe: userNameString,
+      demandOption: true,
+      type: 'string',
+    },
+    title: {
+      describe: noteTitleString,
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    // Check if the arguments are strings.
+    if (
+      typeof argv.title === 'string' &&
+      typeof argv.user === 'string'
+    ) textNotes.deleteNote(argv.user, argv.title);
+  },
+});
+/**
+ * List notes command line.
+ */
+yargs.command({
+  command: 'list',
+  describe: 'List all notes',
+  builder: {
+    user: {
+      describe: userNameString,
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    // Check if the arguments are strings.
+    if (typeof argv.user === 'string') textNotes.listNotes(argv.user);
+  },
+});
+/**
+ * Print note command line.
+ */
+yargs.command({
+  command: 'print',
+  describe: 'Print note',
+  builder: {
+    user: {
+      describe: userNameString,
+      demandOption: true,
+      type: 'string',
+    },
+    title: {
+      describe: noteTitleString,
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    // Check if the arguments are strings.
+    if (
+      typeof argv.title === 'string' &&
+      typeof argv.user === 'string'
+    ) textNotes.printNote(argv.user, argv.title);
+  },
+});
+/**
+ * Important to process the arguments.
+ */
+yargs.parse();
 ```
 
 **Explicación del fichero de la Aplicación:**
@@ -177,7 +523,7 @@ describe('Practica 9 - Tests', () => {
 
     describe('listNotes() method tests', () => {
       it('notes.listNotes() returns # Fourth attempt # Third attempt', () => {
-        expect(notes.listNotes('Jack')).to.be.equal('# Fourth attempt\n# Third attempt\n');
+        expect(notes.listNotes('Jack')).to.be.equal('# Fourth attempt \n# Third attempt \n');
       });
       it('notes.listNotes() returns Error: User not found!', () => {
         expect(notes.listNotes('John')).to.be.equal('Error: User not found!');
@@ -259,3 +605,20 @@ En esta carpeta abrimos el `index.html` con la extensión de VSCode llamada `Liv
 
 # 7. Conclusión.
 ---
+Introducir por línea de comandos en TypeScript es algo nuevo para mi, pero con el paquete **yargs** la verdad que se hizo muy fácil, he tenido que buscar alguna que otra documentación pero en general no se me ha hecho difícil. Esto combinado con la API síncrona de Node.js ha hecho posible la realización de la práctica, esta API es bastante sencilla y se puede buscar información fácilmente por internet, por lo que no me ha supuesto un gran problema.
+
+El paquete **chalk** me ha gustado especialmente, ya que me gustaría haberlo aprendido para la práctica del *Conecta 4* y así poder pintar las casillas de los colores correspondientes. Seguramente lo utilice en las siguientes prácticas.
+
+Con lo que mas problemas tuve ha sido esta vez con **Sonar Cloud**, ya que he intentado crear una **Quality Gate** personal, y una vez creada he realizado un push al repositorio y me encuentro con que la Quality Gate que acabo de crear ha desaparecido y se sigue guiando por la original. Lo realicé varias veces y solo una vez funcionó, pero al siguiente `push` vuelve a desaparecer. Entonces con la Quality Gate original no me lee correctamente el Coverage (ya que no quiero que analice uno de los ficheros) y me indica líneas duplicadas que son necesarias y bloques de código duplicados que no logro encontrar. Espero poder solucionar esto para las siguientes prácticas.
+
+# 8. Bibliografía.
+---
+[Guión Práctica 9](https://ull-esit-inf-dsi-2122.github.io/prct09-filesystem-notes-app/).
+
+[API síncrona de Node.js](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html#synchronous-api).
+
+[Paquete Chalk](https://www.npmjs.com/package/chalk).
+
+[Paquete Yargs](https://www.npmjs.com/package/yargs).
+
+Jeff Pérez Frade [Perfil GitHub](https://github.com/jeffperezfrade).
