@@ -4,9 +4,9 @@ import {TextNotes, colors} from '../TextNotes/TextNotes.class';
  * Creating constants due to Sonar Cloud duplications.
  * Removing the type annotation 'string' due to code s
  */
-const noteTitle = 'Note title';
-const userName = 'User name';
-const noteColor = 'Note color';
+const noteTitleString = 'Note title';
+const userNameString = 'User name';
+const noteColorString = 'Note color';
 /**
  * TextNotes object.
  */
@@ -19,12 +19,12 @@ yargs.command({
   describe: 'Add new note',
   builder: {
     user: {
-      describe: userName,
+      describe: userNameString,
       demandOption: true,
       type: 'string',
     },
     title: {
-      describe: noteTitle,
+      describe: noteTitleString,
       demandOption: true,
       type: 'string',
     },
@@ -34,7 +34,7 @@ yargs.command({
       type: 'string',
     },
     color: {
-      describe: noteColor,
+      describe: noteColorString,
       demandOption: true,
       type: 'string',
     },
@@ -64,12 +64,12 @@ yargs.command({
   describe: 'Modify note',
   builder: {
     user: {
-      describe: userName,
+      describe: userNameString,
       demandOption: true,
       type: 'string',
     },
     title: {
-      describe: noteTitle,
+      describe: noteTitleString,
       demandOption: true,
       type: 'string',
     },
@@ -79,7 +79,7 @@ yargs.command({
       type: 'string',
     },
     color: {
-      describe: noteColor,
+      describe: noteColorString,
       demandOption: true,
       type: 'string',
     },
@@ -109,12 +109,12 @@ yargs.command({
   describe: 'Delete note',
   builder: {
     user: {
-      describe: userName,
+      describe: userNameString,
       demandOption: true,
       type: 'string',
     },
     title: {
-      describe: noteTitle,
+      describe: noteTitleString,
       demandOption: true,
       type: 'string',
     },
@@ -135,7 +135,7 @@ yargs.command({
   describe: 'List all notes',
   builder: {
     user: {
-      describe: userName,
+      describe: userNameString,
       demandOption: true,
       type: 'string',
     },
@@ -153,12 +153,12 @@ yargs.command({
   describe: 'Print note',
   builder: {
     user: {
-      describe: userName,
+      describe: userNameString,
       demandOption: true,
       type: 'string',
     },
     title: {
-      describe: noteTitle,
+      describe: noteTitleString,
       demandOption: true,
       type: 'string',
     },
