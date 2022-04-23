@@ -24,8 +24,12 @@ export class TextNotes {
    * @returns The object of the class.
    */
   public static getNotes(): TextNotes {
-    if (!fs.existsSync(`./database`)) fs.mkdirSync(`./database`, {recursive: true});
-    if (!TextNotes.notes) TextNotes.notes = new TextNotes();
+    if (!fs.existsSync(`./database`)) {
+      fs.mkdirSync(`./database`, {recursive: true});
+    }
+    if (!TextNotes.notes) {
+      TextNotes.notes = new TextNotes();
+    }
     return TextNotes.notes;
   }
   /**
@@ -44,7 +48,7 @@ export class TextNotes {
     if (fs.existsSync(`./database/${userName}`)) {
       // Check if the title already exists.
       if (!fs.existsSync(`./database/${userName}/${joinTitle}.json`)) {
-        // We add it with the structure
+        // We add it with the structure.
         fs.writeFileSync(`./database/${userName}/${joinTitle}.json`, fileStructure);
         console.log(chalk.green(`New note added! with title: ${title}.`));
         return `New note added! with title: ${title}.`;
@@ -124,6 +128,7 @@ export class TextNotes {
     // Check if user exists
     if (fs.existsSync(`./database/${userName}`)) {
       console.log(chalk.white('Your notes: ' + '\n'));
+      // Removing the type annotation 'string' due to code smells.
       let fileNames = '';
       // Find all notes
       fs.readdirSync(`./database/${userName}/`).forEach((note) => {
