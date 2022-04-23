@@ -233,7 +233,7 @@ fs.rmdirSync('./database', {recursive: true});
   18 passing (75ms)
 ```
 
-# 5. Cubrimiento de código (Coveralls - Instambul)
+# 5. Cubrimiento de código (Coveralls - Instambul).
 ---
 En esta práctica se han añadido un informe de cubrimiento de código. Así podemos observar el porcentaje de nuestro código que está cubierto por las pruebas realizadas con **Mocha y Chai**.
 
@@ -242,3 +242,17 @@ Ejecutamos el comando **npm run coverage** para obtener la tabla con los resulta
 ![Coverage](./img/coverage.PNG)
 
 **Aunque esta vez ya este proceso se encuentra automatizado mediante una `GitHub Action` donde cada vez que se realiza un `push` al repositorio se envía el análisis a la página de `Coveralls`.**
+
+![Coveralls](./img/coveralls.PNG)
+
+# 6. Documentación.
+---
+Esta práctica también cuenta con la documentación del código generada por TypeDoc, para generarla es necesario añadir todos los ficheros a la configuración de `typedoc.json`.
+
+![Entry Points](./img/entryPoints.PNG)
+
+A continuación ejecutamos el comando `npm run doc` y se nos generaran todos los archivos en la carpeta de salida que hemos escrito.
+
+En esta carpeta abrimos el `index.html` con la extensión de VSCode llamada `Live Server` para poder ver el contenido de la página.
+
+![Documentation Page]()
